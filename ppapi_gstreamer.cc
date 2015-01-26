@@ -51,6 +51,7 @@
 using ppapi::thunk::EnterResourceNoLock;
 using ppapi::thunk::PPB_Graphics3D_API;
 
+//#define GST_PPAPI_NO_HOLE 1
 
 namespace {
 
@@ -124,8 +125,9 @@ class PPAPIGstreamerInstance : public pp::Instance,
   void *videodecodergstreamer_;
   std::string src_;
 
-//if NO_HOLE
+#ifdef GST_PPAPI_NO_HOLE
   ppapi::ScopedPPResource graphics3d_;
+#endif
   gpu::gles2::GLES2Implementation* gles2_impl_;
   //std::vector<gpu::Mailbox>& mailboxes;
 
@@ -154,8 +156,7 @@ PPAPIGstreamerInstance::PPAPIGstreamerInstance(PP_Instance instance, pp::Module*
 
   assert(gles2_if_);
 
-//if NO_HOLE
-#if 0
+#ifdef GST_PPAPI_NO_HOLE
   ppapi::thunk::EnterResourceCreationNoLock enter_create(pp_instance());
     if (!enter_create.failed()) {
         int32_t attrib_list[] = {PP_GRAPHICS3DATTRIB_NONE};
@@ -171,7 +172,7 @@ PPAPIGstreamerInstance::PPAPIGstreamerInstance(PP_Instance instance, pp::Module*
 
     }
 #endif
-//#endif //NO_HOLE
+
   RequestInputEvents(PP_INPUTEVENT_CLASS_MOUSE);
 }
 
