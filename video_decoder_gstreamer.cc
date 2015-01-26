@@ -242,7 +242,7 @@ int32_t VideoDecoderGstreamer_initialize(void *gst, const char *url)
                             NULL) ;
 
         gst_bin_add_many (GST_BIN (pipeline_sink), color_conv, decoder->sink, NULL);
-        gst_element_link_filtered(color_conv, caps, decoder->sink) ;
+        gst_element_link_filtered(color_conv, decoder->sink, caps) ;
 
         /* Set the URI to play */
         g_object_set (decoder->playbin, "uri", url,
