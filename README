@@ -1,0 +1,10 @@
+This is an experimental Gstreamer PPAPI plugin for Chromium.
+
+It is tested on the STM B2120 ARM board with Gstreamer 1.4 running on V4L.
+
+
+TODO:
+----
+ - Add sandbox support.
+ - Generic code cleanup and documentation.
+ - support playback mode without a hole punching.
