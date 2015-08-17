@@ -1,0 +1,57 @@
+diff --git a/ppapi/ppapi_internal.gyp b/ppapi/ppapi_internal.gyp
+index d96770e..17a2b67 100644
+--- a/ppapi/ppapi_internal.gyp
++++ b/ppapi/ppapi_internal.gyp
+@@ -30,6 +30,7 @@
+     'ppapi_proxy.gypi',
+     'ppapi_shared.gypi',
+     'ppapi_tests.gypi',
++    'ppapi_gstreamer.gypi',
+   ],
+   'targets': [
+     {
+diff --git a/ppapi/ppapi_gstreamer.gypi b/ppapi/ppapi_gstreamer.gypi
+new file mode 100644
+index 0000000..27fbd11
+--- /dev/null
++++ b/ppapi/ppapi_gstreamer.gypi
+@@ -0,0 +1,38 @@
++{
++  'targets': [
++   {
++      'target_name': 'ppapi_gstreamer',
++      'type': 'shared_library',
++      'dependencies': [
++        '<(DEPTH)/ppapi/ppapi.gyp:ppapi_cpp',
++        '<(DEPTH)/ppapi/ppapi.gyp:ppapi_gles2',
++      ],
++      'include_dirs': [
++        '<(DEPTH)/ppapi/lib/gl/include',
++      ],
++
++      'cflags': [
++      '<!@(<(pkg-config) --cflags gstreamer-1.0)',
++      ],
++      'sources': [
++        'gstreamer/ppapi_gstreamer.cc',
++        'gstreamer/video_decoder_gstreamer.cc',
++        'gstreamer/video_decoder_gstreamer.h',
++#        'gstreamer/gstreamer_player_hole.cc',
++#        'gstreamer/gstreamer_player_hole.h',
++      ],
++      'link_settings': {
++            'ldflags': [
++              '<!@(<(pkg-config) --libs-only-L --libs-only-other gstreamer-1.0)',
++            ],
++            'libraries': [
++              '<!@(<(pkg-config) --libs-only-l gstreamer-1.0)',
++            ],
++       },
++       'variables': {
++            'pkg-config': 'pkg-config',
++       },
++
++    },
++  ],
++}
+

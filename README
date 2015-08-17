@@ -2,6 +2,27 @@ This is an experimental Gstreamer PPAPI plugin for Chromium.
 
 It is tested on the STM B2120 ARM board with Gstreamer 1.4 running on V4L.
 
+BUILDING
+--------
+
+The code is tested with 3x.x version of Chromium with Wayland Ozone backend.
+With minor modifications of the build scripts it will work with latest Chromium version.
+The plugin has to be built inside the Chromium source tree.
+
+1. Checkout the Chromium sources.
+2. Apply the patch from the patch/ directory.
+3. Checkout this project to the ppapi/gstreamer folder.
+4. Build chromium using ninja
+
+RUNNING
+-------
+
+# out/Release/chrome --register-pepper-plugins="out/Release/libppapi_gstreamer.so;application/x-ppapi-gstreamer"
+
+Embedding a gstreamer player into a HTML5 app:
+
+<embed type="application/x-ppapi-gstreamer" src="video uri"></embed>
+
 
 TODO:
 ----
